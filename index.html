@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise获取数据</title>
+</head>
+
+<body>
+    <script src="./multiple-xhr.js"></script>
+    <script type="text/javascript" src="./doT-master/doT.js"></script>
+    <script>
+        // 运行示例
+        var data
+        data  = main().then(function (value) {
+            // console.log(value)
+            return value
+        }).catch(function (error) {
+            console.log(error);
+        });
+        setTimeout(output,10)
+
+        function output(){
+            var mainDiv =document.getElementById("main");
+            for(var i=0;i<data[0].length;i++){
+                var name=data[0][i].name
+                var email=data[0][i].email
+                var message=data[0][i].message
+                var tempFn=doT.template("<p>Here is a name {{=it.foo}}</p>")
+                var result=tempFn({foo:data[0][i].name})
+                mainDiv.innerHTML+=result
+                
+            }
+        }
+    </script>
+    <div id="main">
+       
+    </div>
+
+
+</body>
+
+</html>
